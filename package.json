@@ -1,7 +1,7 @@
 {
-  "name": "gardenbed",
+  "name": "fastchange",
   "version": "1.0.0",
-  "description": "The basics for creating small front end focused web apps.",
+  "description": "You need me to make change for your big bills? Let me see if I can do that for you.",
   "main": "./src/index.js",
   "scripts": {
     "dev": "NODE_ENV=development NODE_OPTIONS=openssl-legacy-provider webpack-dev-server --hot --mode development --open --host 0.0.0.0",
@@ -34,6 +34,11 @@
   "dependencies": {
     "@babel/core": "^7.19.0",
     "@babel/preset-env": "^7.19.0",
-    "babel-loader": "^8.2.5"
+    "@babel/preset-react": "^7.24.6",
+    "babel-loader": "^8.2.5",
+    "gardentools": "^1.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "topiary-tools": "^1.0.1"
   }
 }

@@ -1,23 +1,28 @@
+const titleCopy = 'Fast Change | You Need Change For That? | Topiary Wolf';
+const descriptionCopy = 'I might be able to make change for that, lemme check.';
+
 module.exports = {
-    title: '![ Insert Title Here ]!',
+    title: titleCopy,
     template: './src/index.html',
     filename: './index.html',
     meta: {
+        'title': titleCopy,
         'viewport': {
             name: 'viewport',
             content: 'width=device-width, initial-scale=1.0'
         },
+        'favicon': 'images/favicon.png',
         'description': {
             name: 'description',    
-            content: '![ Insert Content Here ]!' 
+            content: descriptionCopy 
         },
         'og:title': {
             property: 'og:title',    
-            content: '![ Insert Content Here ]!'
+            content: titleCopy
         },
         'og:description': {
             property: 'og:description',    
-            content: '![ Insert Content Here ]!'
+            content: descriptionCopy
         },
         'og:type': {
             property: 'og:type',    
@@ -25,11 +30,11 @@ module.exports = {
         },
         'og:url': {
             property: 'og:url',    
-            content: '![ Insert Content Here ]!'
+            content: 'http://topiarywolf.com/fastchange'
         },
         'og:image': {
             property: 'og:image',    
-            content: '![ Insert Content Here ]!'
+            content: 'images/headerImage.png'
         }
     }
 };

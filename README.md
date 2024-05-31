@@ -1,22 +1,15 @@
-# Raised Garden Bed
 
-Simple front end focused web development stack.
+# Can you make change for a..?
+![We might be able to break that](/src/resources/images/headerImage.png)
 
-**Configure Html Template**
-- htmlWebpack.config.js
+You need me to break that big bill? Let me see if I have that in the register.
 
-**Run Webpack Dev Server**
+**Open the cash register**
+    - npm install 
+    - npm run dev
 
-- npm run dev
+**Forked from:**
 
-**Output Topiary**
+[Raised Garden Bed](https://github.com/ArledgeMike/raisedGardenBed)
 
-- npm run deploy (index.html, css file, js file)
-
-**Github Actions**
-
-- .github/workflow/nodejs.yml
-
-**Pipeline deploy**
-
-- .cpaney.yml
+[Garden Tools ](https://www.npmjs.com/package/gardentools)

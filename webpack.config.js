@@ -13,8 +13,6 @@ module.exports = {
 		path: path.resolve(__dirname, './dist'),
 	},
 	plugins: [
-		new ESLintPlugin(),
-		new SassLintPlugin(),
 		new MiniCssExtractPlugin({
 			filename: 'index.css',
 			chunkFilename: 'index.css',
