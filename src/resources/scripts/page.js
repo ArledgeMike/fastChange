@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import AddMoneySection from './components/addMoneySection';
 import RemoveMoneySection from './components/removeMoneySection';
 import MakeChangeSection from './components/makeChangeSection';
+import ErrorInfoSection from './components/errorInfoSection';
 
 const App = () => {
 	const inputValues = [
@@ -145,7 +146,7 @@ const App = () => {
 			</div>
 			<div>
 			</div>
-			{error && <div style={{ color: 'red' }}>{error}</div>}
+			<ErrorInfoSection error={error}/>
 		</div>
 
 	);
