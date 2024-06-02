@@ -63,7 +63,7 @@ const App = () => {
 	};
 
 	const addMoney = (denomination, count) => {
-		if(count <= 0){return false}
+		if(count <= 0 || denomination === 0){return false}
 		setRegister(prevRegister => ({
 			...prevRegister,
 			[denomination]: prevRegister[denomination] + count
@@ -71,7 +71,7 @@ const App = () => {
 	};
 
 	const removeMoney = (denomination, count) => {
-		if(count <= 0){return false}
+		if(count <= 0 || denomination === 0){return false}
 		if (register[denomination] >= count) {
 			setRegister(prevRegister => ({
 				...prevRegister,
