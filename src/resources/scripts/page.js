@@ -32,13 +32,11 @@ const App = () => {
 		return Math.floor(Math.random() * (max - min + 1) ) + min;
 	}
 
-	const initialCashonHand = {
-		20: randomizeAmount(2,9),
-		10: randomizeAmount(2,9),
-		5: randomizeAmount(2,9),
-		2: randomizeAmount(2,9),
-		1: randomizeAmount(2,9),
-	};
+	let initialCashonHand = {};
+
+	for(const entry of inputValues){
+		initialCashonHand[entry.value] =  randomizeAmount(2,9);
+	}
 
 	const [register, setRegister] = useState(initialCashonHand);
 	const [moneyAdd, insertMoney] = useState({
