@@ -4,38 +4,17 @@ import RemoveMoneySection from './components/removeMoneySection';
 import MakeChangeSection from './components/makeChangeSection';
 import ErrorInfoSection from './components/errorInfoSection';
 
-const App = () => {
-	const inputValues = [
-		{
-			label: 'Twenties',
-			value: 20
-		},
-		{
-			label: 'Tens',
-			value: 10
-		},
-		{
-			label: 'Fives',
-			value: 5
-		},
-		{
-			label: 'Twos',
-			value: 2
-		},
-		{
-			label: 'Singles',
-			value: 1
-		}
-	];
+import WalletConfig from './config/walletConfig';
 
-	const randomizeAmount = (min, max) => {
-		return Math.floor(Math.random() * (max - min + 1) ) + min;
-	}
+const App = () => {
+	console.log('the wallet config', WalletConfig());
+	
+	const inputValues = new WalletConfig();
 
 	let initialCashonHand = {};
 
 	for(const entry of inputValues){
-		initialCashonHand[entry.value] =  randomizeAmount(2,9);
+		initialCashonHand[entry.value] =  entry.qty;
 	}
 
 	const [register, setRegister] = useState(initialCashonHand);
@@ -143,6 +122,7 @@ const App = () => {
 			<div>
 				<h3>Total: ${calculateTotal()}</h3>
 				<h4>{formatRegister()}</h4>
+
 				<AddMoneySection onChange={radioChange} onAddMoney={addMoney} addMoneyValues={moneyAdd} inputValues={inputValues} />
 				<RemoveMoneySection onChange={radioChange} onRemoveMoney={removeMoney} removeMoneyValues={moneyRemove} inputValues={inputValues} />
 				<MakeChangeSection onChange={radioChange} onMakeChange={makeChange} makeChangeValues={moneyChange} />
