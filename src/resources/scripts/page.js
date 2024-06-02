@@ -146,8 +146,7 @@ const App = () => {
 			</div>
 			<div>
 			</div>
-			<ErrorInfoSection />
-			{error && <div style={{ color: 'red' }}>{error}</div>}
+			<ErrorInfoSection error={error}/>
 		</div>
 
 	);

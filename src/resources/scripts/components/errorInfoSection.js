@@ -1,9 +1,10 @@
 import React from 'react';
 
-const ErrorInfoSection = () => {
+const ErrorInfoSection = ({ error }) => {
+	if(error === ''){return false};
 
 	return (
-	<p>Error Occured</p>	
+		<p>{error}</p>
 	);
 }
 
