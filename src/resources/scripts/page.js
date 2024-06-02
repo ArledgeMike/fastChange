@@ -26,16 +26,19 @@ const App = () => {
 			label: 'Singles',
 			value: 1
 		}
-	]
-	const intialCashonHand = {
-		20: 10,
-		10: 10,
-		5: 5,
-		2: 5,
-		1: 30
-	};
+	];
 
-	const [register, setRegister] = useState(intialCashonHand);
+	const randomizeAmount = (min, max) => {
+		return Math.floor(Math.random() * (max - min + 1) ) + min;
+	}
+
+	let initialCashonHand = {};
+
+	for(const entry of inputValues){
+		initialCashonHand[entry.value] =  randomizeAmount(2,9);
+	}
+
+	const [register, setRegister] = useState(initialCashonHand);
 	const [moneyAdd, insertMoney] = useState({
 		denomination: 0,
 		qty: 0
