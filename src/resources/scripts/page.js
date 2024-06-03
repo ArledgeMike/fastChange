@@ -7,21 +7,27 @@ import ErrorInfoSection from './components/errorInfoSection';
 import WalletConfig from './config/walletConfig';
 
 const App = () => {
-	console.log('the wallet config', WalletConfig());
-	
-	const inputValues = new WalletConfig();
+
+	const initialWallet = new WalletConfig();
+
+	const inputValues = [];
+	for (const entry of initialWallet){
+		const inputValue = {
+			label: entry.label,
+			value: entry.value
+		};
+		inputValues.push(inputValue);
+	}
 
 	let initialCashonHand = {};
-
-	for(const entry of inputValues){
-		initialCashonHand[entry.value] =  entry.qty;
+	for (const entry of initialWallet) {
+		initialCashonHand[entry.value] = entry.qty;
 	}
 
 	const [register, setRegister] = useState(initialCashonHand);
 	const [moneyAdd, insertMoney] = useState({
 		denomination: 0,
 		qty: 0
-
 	});
 
 	const [moneyRemove, takeMoney] = useState({
@@ -46,7 +52,7 @@ const App = () => {
 	};
 
 	const addMoney = (denomination, count) => {
-		if(count <= 0 || denomination === 0){return false}
+		if (count <= 0 || denomination === 0) { return false }
 		setRegister(prevRegister => ({
 			...prevRegister,
 			[denomination]: prevRegister[denomination] + count
@@ -54,7 +60,7 @@ const App = () => {
 	};
 
 	const removeMoney = (denomination, count) => {
-		if(count <= 0 || denomination === 0){return false}
+		if (count <= 0 || denomination === 0) { return false }
 		if (register[denomination] >= count) {
 			setRegister(prevRegister => ({
 				...prevRegister,
@@ -66,7 +72,7 @@ const App = () => {
 	};
 
 	const makeChange = amount => {
-		if(amount === 0){return false};
+		if (amount === 0) { return false };
 		const denominations = [20, 10, 5, 2, 1];
 		let remaining = amount;
 		let change = {};
@@ -122,14 +128,11 @@ const App = () => {
 			<div>
 				<h3>Total: ${calculateTotal()}</h3>
 				<h4>{formatRegister()}</h4>
-
 				<AddMoneySection onChange={radioChange} onAddMoney={addMoney} addMoneyValues={moneyAdd} inputValues={inputValues} />
 				<RemoveMoneySection onChange={radioChange} onRemoveMoney={removeMoney} removeMoneyValues={moneyRemove} inputValues={inputValues} />
 				<MakeChangeSection onChange={radioChange} onMakeChange={makeChange} makeChangeValues={moneyChange} />
 			</div>
-			<div>
-			</div>
-			<ErrorInfoSection error={error}/>
+			<ErrorInfoSection error={error} />
 		</div>
 
 	);

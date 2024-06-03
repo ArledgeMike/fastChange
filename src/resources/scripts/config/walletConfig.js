@@ -1,6 +1,6 @@
 
 const WalletConfig = () => {
-	const inputValues = [
+	let inputValues = [
 		{
 			label: 'Twenties',
 			value: 20
