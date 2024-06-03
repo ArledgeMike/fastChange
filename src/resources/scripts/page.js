@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import AddMoneySection from './components/addMoneySection';
-import RemoveMoneySection from './components/removeMoneySection';
 import MakeChangeSection from './components/makeChangeSection';
 import ErrorInfoSection from './components/errorInfoSection';
+import EditWalletSection from './components/editWalletSection';
 
 import WalletConfig from './config/walletConfig';
 
@@ -25,12 +24,8 @@ const App = () => {
 	}
 
 	const [register, setRegister] = useState(initialCashonHand);
-	const [moneyAdd, insertMoney] = useState({
-		denomination: 0,
-		qty: 0
-	});
 
-	const [moneyRemove, takeMoney] = useState({
+	const [editRegisterValues, setRegisterEditValues] = useState({
 		denomination: 0,
 		qty: 0
 	});
@@ -93,21 +88,24 @@ const App = () => {
 		}
 	};
 
-	const radioChange = (event) => {
+	const inputChange = (event) => {
 		const inputType = event.target.dataset.inputtype;
 		const inputValue = event.target.value;
-
-		if (inputType === 'addDenom') {
-			insertMoney({ denomination: inputValue, qty: moneyAdd.qty })
+		if(inputType === 'denomination'){
+			setRegisterEditValues((prevWallet)=>{
+				return {
+					denomination:  Number(inputValue),
+					qty: prevWallet.qty ? Number(prevWallet.qty) : 0
+				}
+			});
 		}
-		if (inputType === 'addQty') {
-			insertMoney({ denomination: Number(moneyAdd.denomination), qty: Number(inputValue) })
-		}
-		if (inputType === 'removeDenom') {
-			takeMoney({ denomination: inputValue, qty: moneyRemove.qty });
-		}
-		if (inputType === 'removeQty') {
-			takeMoney({ denomination: Number(moneyRemove.denomination), qty: Number(inputValue) });
+		if(inputType === 'quantity'){
+			setRegisterEditValues((prevWallet)=>{
+				return {
+					denomination: Number(prevWallet.denomination),
+					qty:  Number(inputValue)
+				}
+			});
 		}
 		if (inputType === 'change') {
 			changeMoney({ qty: Number(inputValue) });
@@ -126,9 +124,8 @@ const App = () => {
 			<div>
 				<h3>Total: ${calculateTotal()}</h3>
 				<h4>{formatRegister()}</h4>
-				<AddMoneySection onChange={radioChange} onAddMoney={addMoney} addMoneyValues={moneyAdd} inputValues={inputValues} />
-				<RemoveMoneySection onChange={radioChange} onRemoveMoney={removeMoney} removeMoneyValues={moneyRemove} inputValues={inputValues} />
-				<MakeChangeSection onChange={radioChange} onMakeChange={makeChange} makeChangeValues={moneyChange} />
+				<EditWalletSection onChange={inputChange} onAddMoney={addMoney} onRemoveMoney={removeMoney}  editValues={editRegisterValues} inputValues={inputValues}  />
+				<MakeChangeSection onChange={inputChange} onMakeChange={makeChange} makeChangeValues={moneyChange} />
 			</div>
 			<ErrorInfoSection error={error} />
 		</div>
