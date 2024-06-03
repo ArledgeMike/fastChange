@@ -76,18 +76,16 @@ const App = () => {
 		const denominations = [20, 10, 5, 2, 1];
 		let remaining = amount;
 		let change = {};
-		let newRegister = { ...register };
 		for (let bill of denominations) {
-			let count = Math.min(Math.floor(remaining / bill), newRegister[bill]);
+			let count = Math.min(Math.floor(remaining / bill), register[bill]);
 			if (count > 0) {
 				change[bill] = count;
 				remaining -= count * bill;
-				newRegister[bill] -= count;
+				register[bill] -= count;
 			}
 		}
 
 		if (remaining === 0) {
-			setRegister(newRegister);
 			setError('');
 			alert(`Change: ${formatChange(change)}`);
 		} else {
