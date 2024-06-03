@@ -4,45 +4,30 @@ import RemoveMoneySection from './components/removeMoneySection';
 import MakeChangeSection from './components/makeChangeSection';
 import ErrorInfoSection from './components/errorInfoSection';
 
-const App = () => {
-	const inputValues = [
-		{
-			label: 'Twenties',
-			value: 20
-		},
-		{
-			label: 'Tens',
-			value: 10
-		},
-		{
-			label: 'Fives',
-			value: 5
-		},
-		{
-			label: 'Twos',
-			value: 2
-		},
-		{
-			label: 'Singles',
-			value: 1
-		}
-	];
+import WalletConfig from './config/walletConfig';
 
-	const randomizeAmount = (min, max) => {
-		return Math.floor(Math.random() * (max - min + 1) ) + min;
+const App = () => {
+
+	const initialWallet = new WalletConfig();
+
+	const inputValues = [];
+	for (const entry of initialWallet){
+		const inputValue = {
+			label: entry.label,
+			value: entry.value
+		};
+		inputValues.push(inputValue);
 	}
 
 	let initialCashonHand = {};
-
-	for(const entry of inputValues){
-		initialCashonHand[entry.value] =  randomizeAmount(2,9);
+	for (const entry of initialWallet) {
+		initialCashonHand[entry.value] = entry.qty;
 	}
 
 	const [register, setRegister] = useState(initialCashonHand);
 	const [moneyAdd, insertMoney] = useState({
 		denomination: 0,
 		qty: 0
-
 	});
 
 	const [moneyRemove, takeMoney] = useState({
@@ -67,7 +52,7 @@ const App = () => {
 	};
 
 	const addMoney = (denomination, count) => {
-		if(count <= 0 || denomination === 0){return false}
+		if (count <= 0 || denomination === 0) { return false }
 		setRegister(prevRegister => ({
 			...prevRegister,
 			[denomination]: prevRegister[denomination] + count
@@ -75,7 +60,7 @@ const App = () => {
 	};
 
 	const removeMoney = (denomination, count) => {
-		if(count <= 0 || denomination === 0){return false}
+		if (count <= 0 || denomination === 0) { return false }
 		if (register[denomination] >= count) {
 			setRegister(prevRegister => ({
 				...prevRegister,
@@ -87,7 +72,7 @@ const App = () => {
 	};
 
 	const makeChange = amount => {
-		if(amount === 0){return false};
+		if (amount === 0) { return false };
 		const denominations = [20, 10, 5, 2, 1];
 		let remaining = amount;
 		let change = {};
@@ -147,9 +132,7 @@ const App = () => {
 				<RemoveMoneySection onChange={radioChange} onRemoveMoney={removeMoney} removeMoneyValues={moneyRemove} inputValues={inputValues} />
 				<MakeChangeSection onChange={radioChange} onMakeChange={makeChange} makeChangeValues={moneyChange} />
 			</div>
-			<div>
-			</div>
-			<ErrorInfoSection error={error}/>
+			<ErrorInfoSection error={error} />
 		</div>
 
 	);
